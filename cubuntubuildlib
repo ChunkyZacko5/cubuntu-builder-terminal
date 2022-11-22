@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Functions library :: for Linux Live Kit scripts
-# Author: Tomas M. <http://www.linux-live.org>
+# Library for Cubuntu Builder: Terminal in Linux, author by Chunky Zacko
 #
 
 # =================================================================
