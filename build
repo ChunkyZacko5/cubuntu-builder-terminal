@@ -1,11 +1,11 @@
 #!/bin/bash
-# Linux Live Kit version 7
+# Cubuntu Builder: Terminal 16.0.5
 
 export PATH=.:./tools:../tools:/usr/sbin:/usr/bin:/sbin:/bin:/
 
-CHANGEDIR=$(dirname $(readlink -f $0))
-echo "Changing current directory to $CHANGEDIR"
-cd $CHANGEDIR
+CURRENTDIR=$(dirname $(readlink -f $0))
+echo "Your directory was in $CURRENTDIR."
+cd $CURRENTDIR
 CWD="$(pwd)"
 
 . ./config || exit 1
