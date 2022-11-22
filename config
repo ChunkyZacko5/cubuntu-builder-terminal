@@ -1,6 +1,6 @@
 #!/bin/bash
 # This is a config file for Cubuntu Builder: Terminal build script.
-# You shouldn't need to change anything expect distro name.
+# You shouldn't need to change anything expect distro name, version, architecture, edition.
 
 # Distro name. Defaults to 'cubuntu';
 # This will be the name of the directory created on your CD/USB, which
@@ -53,3 +53,7 @@ LMK="lib/modules/$KERNEL"
 # Edition, will be ("desktop" or "server" or "terminal").
 # Default is to 'desktop'.
 EDITION="desktop"
+
+# Version, that version in your Linux distribution.
+# For example: (18.04, 20.04, 1.0). Default: 22.11
+VERSION="22.11"
