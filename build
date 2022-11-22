@@ -54,14 +54,14 @@ fi
 # BIOS / MBR booting
 cp -r bootfiles/* $BOOT
 cat bootfiles/syslinux.cfg | sed -r "s:/boot/:/$DISTRONAME/boot/:" > $BOOT/syslinux.cfg
-cat bootfiles/bootinst.bat | sed -r "s:/boot/:/$DISTRONAME/boot/:" | sed -r "s:\\\\boot\\\\:\\\\$LIVEKITNAME\\\\boot\\\\:" > $BOOT/bootinst.bat
+cat bootfiles/bootinst.bat | sed -r "s:/boot/:/$DISTRONAME/boot/:" | sed -r "s:\\\\boot\\\\:\\\\$DISTRONAME\\\\boot\\\\:" > $BOOT/bootinst.bat
 cp $VMLINUZ $BOOT/ || exit
 
 # UEFI booting
 mkdir -p $BOOT/EFI/Boot
 cp bootfiles/EFI/Boot/syslinux.efi $BOOT/EFI/Boot/bootx64.efi
 cp bootfiles/EFI/Boot/{ldlinux.e64,menu.c32,libutil.c32,vesamenu.c32,libcom32.c32} $BOOT/EFI/Boot
-cat $BOOT/syslinux.cfg | sed -r "s:/$LIVEKITNAME/boot/vesamenu:vesamenu:" > $BOOT/EFI/Boot/syslinux.cfg
+cat $BOOT/syslinux.cfg | sed -r "s:/$DISTRONAME/boot/vesamenu:vesamenu:" > $BOOT/EFI/Boot/syslinux.cfg
 
 # create compressed 01-core.sb
 COREFS=""
@@ -79,18 +79,20 @@ TARGET=/tmp
 
 cat "$CWD/bootinfo.txt" | fgrep -v "#" | sed -r "s/linuxseed/$DISTRONAME/" | sed -r "s/\$/\x0D/" > readme.txt
 
-echo cd $LIVEKITDATA '&&' $MKISOFS -o "$TARGET/$LIVEKITNAME-22.11-desktop-$ARCH.iso" -v -J -R -D -A "$LIVEKITNAME" -V "$LIVEKITNAME" \
+echo cd $LIVEKITDATA '&&' $MKISOFS -o "$TARGET/$DISTRONAME-$VERSION-$EDITION-$ARCH.iso" -v -J -R -D -A "$DISTRONAME" -V "$DISTRONAME" \
 -no-emul-boot -boot-info-table -boot-load-size 4 \
--b "$LIVEKITNAME"/boot/isolinux.bin -c "$LIVEKITNAME"/boot/isolinux.boot . \
-> $TARGET/gen_"$LIVEKITNAME"_iso.sh
-chmod o+x $TARGET/gen_"$LIVEKITNAME"_iso.sh
+-b "$DISTRONAME"/boot/isolinux.bin -c "$DISTRONAME"/boot/isolinux.boot . \
+> $TARGET/gen_"$DISTRONAME"_iso.sh
+chmod o+x $TARGET/gen_"$DISTRONAME"_iso.sh
 
-echo cd $LIVEKITDATA '&&' zip -0 -r "$TARGET/$LIVEKITNAME-$ARCH.zip" '*' \
-> $TARGET/gen_"$LIVEKITNAME"_zip.sh
-chmod o+x $TARGET/gen_"$LIVEKITNAME"_zip.sh
+echo cd $DISTRODATA '&&' zip -0 -r "$TARGET/$DISTRONAME-$ARCH.zip" '*' \
+> $TARGET/gen_"$DISTRONAME"_zip.sh
+chmod o+x $TARGET/gen_"$DISTRONAME"_zip.sh
 
-echo "-----------------------------"
-echo "Finished. Find your result in $LIVEKITDATA"
-echo "To build ISO, run: $TARGET/gen_"$LIVEKITNAME"_iso.sh"
-echo "To build ZIP, run: $TARGET/gen_"$LIVEKITNAME"_zip.sh"
+echo "Your Linux distribution is done."
+echo "You can send ISO to SourceForge, Internet Archive, etc."
+echo "To generate as ISO, run: $TARGET/gen_"$DISTRONAME"_iso.sh"
+echo "To generate as ZIP, run: $TARGET/gen_"$DISTRONAME"_zip.sh"
+echo "Enjoying Cubuntu Builder?"
+echo "5 will you rate, use ./rate5."
 cd $CWD
