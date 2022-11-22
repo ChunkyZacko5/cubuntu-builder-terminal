@@ -9,7 +9,7 @@ cd $CURRENTDIR
 CWD="$(pwd)"
 
 . ./config || exit 1
-. ./livekitlib || exit 1
+. ./cubuntubuildlib || exit 1
 
 # only root can continue, because only root can read all files from your system
 allow_only_root
