@@ -1,11 +1,10 @@
 #!/bin/bash
 # Create initramfs image
-# Author: Tomas M <http://www.linux-live.org/>
 #
 
 . ../config
 
-INITRAMFS=/tmp/$LIVEKITNAME-initramfs-$$
+INITRAMFS=/tmp/$DISTRONAME-initramfs-$$
 
 # copy file to initramfs tree, including
 # all library dependencies (as shown by ldd)
@@ -144,7 +143,7 @@ chmod a+x $INITRAMFS/init
 cp shutdown $INITRAMFS
 chmod a+x $INITRAMFS/shutdown
 ln -s ../init $INITRAMFS/bin/init
-cp ../livekitlib $INITRAMFS/lib/
+cp ../cubuntubuildlib $INITRAMFS/lib/
 cp ../config $INITRAMFS/lib/
 
 cd $INITRAMFS

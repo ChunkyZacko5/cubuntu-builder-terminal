@@ -3,7 +3,6 @@
 # systemd (if you use it) on shutdown, no need for any tweaks.
 # Purpose of this script is to unmount everything cleanly.
 #
-# Author: Tomas M <http://www.linux-live.org/>
 #
 
 . /lib/config
@@ -11,7 +10,7 @@
 
 debug_start
 
-debug_log "Entering shutdown procedures of Linux Live Kit"
+debug_log "Entering shutdown procedures of CB:T"
 debug_log "Called with arguments: " "$*"
 
 # if debug is enabled, run shell now
